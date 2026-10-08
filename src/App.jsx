@@ -1,34 +1,55 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import StudentProfile from "./components/StudentProfile";
 import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  const student1Name = "Anu";
-  const student1Department = "CSE";
-  const student1Year = "3rd Year";
+  const studentName = "Anu";
+  const studentDepartment = "CSE";
+  const studentYear = "3rd Year";
 
-  const student2Name = "Bala";
-  const student2Department = "Computer Science";
-  const student2Year = "3rd Year";
+  const [practiceCount, setPracticeCount] = useState(0);
+  const [showProfile, setShowProfile] = useState(true);
+
+  const completePractice = () => {
+    setPracticeCount(practiceCount + 1);
+  };
+
+  const resetPractice = () => {
+    setPracticeCount(0);
+  };
+
+  const toggleProfile = () => {
+    setShowProfile(!showProfile);
+  };
 
   return (
     <div className="app">
       <Header />
 
-      <h2>Student 1</h2>
-      <StudentProfile
-        name={student1Name}
-        department={student1Department}
-        year={student1Year}
-      />
+      <div className="controls">
+        <button onClick={completePractice}>
+          Complete Practice
+        </button>
 
-      <h2>Student 2</h2>
-      <StudentProfile
-        name={student2Name}
-        department={student2Department}
-        year={student2Year}
-      />
+        <button onClick={resetPractice}>
+          Reset
+        </button>
+
+        <button onClick={toggleProfile}>
+          {showProfile ? "Hide Profile" : "Show Profile"}
+        </button>
+      </div>
+
+      {showProfile && (
+        <StudentProfile
+          name={studentName}
+          department={studentDepartment}
+          year={studentYear}
+          practiceCount={practiceCount}
+        />
+      )}
 
       <Footer />
     </div>

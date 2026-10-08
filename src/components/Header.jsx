@@ -1,8 +1,8 @@
 function Header() {
   return (
-    <h1 className="header">
-      Student Management System
-    </h1>
+    <header>
+      <h1 className="header">Student Management System</h1>
+    </header>
   );
 }
 
